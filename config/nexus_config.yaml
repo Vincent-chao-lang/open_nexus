@@ -1,0 +1,25 @@
+models:
+  planner: "anthropic/claude-3-5-sonnet-20241022"
+  executor: "deepseek/deepseek-chat"
+  reviewer: "openai/gpt-4o"
+
+workflow:
+  mode: "safe_analysis"
+  research_depth: 2
+  max_iterations: 3
+  budget_limit: 2.0
+
+memory:
+  sqlite_path: "./data/logic_graph.db"
+  decay_lambda_t: 0.05
+  decay_lambda_v: 0.3
+  confidence_threshold: 0.4
+
+safety:
+  git_repo_path: "./"
+  auto_rollback: true
+
+global_constraints: |
+  1. 必须保持所有 API 入口向后兼容。
+  2. 严禁引入任何新的全局变量。
+  3. 命名规范必须符合项目现有 PEP8 变体。
